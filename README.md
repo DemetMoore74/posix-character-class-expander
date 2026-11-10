@@ -54,3 +54,10 @@ Returns the sorted list of supported class names (without the surrounding
 
 A frozen object mapping each supported class name to its expansion. Exposed so
 callers can inspect or reuse the mapping without re-deriving it.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
